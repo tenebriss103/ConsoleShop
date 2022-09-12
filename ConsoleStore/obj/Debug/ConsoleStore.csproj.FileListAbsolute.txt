@@ -1,0 +1,7 @@
+C:\Users\ANASTASIYA\source\repos\ConsoleStore\ConsoleStore\obj\Debug\ConsoleStore.csproj.AssemblyReference.cache
+C:\Users\ANASTASIYA\source\repos\ConsoleStore\ConsoleStore\obj\Debug\ConsoleStore.csproj.CoreCompileInputs.cache
+C:\Users\ANASTASIYA\source\repos\ConsoleStore\ConsoleStore\bin\Debug\ConsoleStore.exe.config
+C:\Users\ANASTASIYA\source\repos\ConsoleStore\ConsoleStore\bin\Debug\ConsoleStore.exe
+C:\Users\ANASTASIYA\source\repos\ConsoleStore\ConsoleStore\bin\Debug\ConsoleStore.pdb
+C:\Users\ANASTASIYA\source\repos\ConsoleStore\ConsoleStore\obj\Debug\ConsoleStore.exe
+C:\Users\ANASTASIYA\source\repos\ConsoleStore\ConsoleStore\obj\Debug\ConsoleStore.pdb
