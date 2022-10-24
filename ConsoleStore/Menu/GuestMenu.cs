@@ -25,7 +25,7 @@ namespace ClassLibrary1.Menu
             Console.WriteLine("3) Login");
 
         }
-        public void PrintAccountRegistration()
+        public bool PrintAccountRegistration()
         {
             Console.Write("Enter name: ");
             string name = Console.ReadLine();
@@ -40,14 +40,16 @@ namespace ClassLibrary1.Menu
 
             guestService.AccountRegistration(name, surname, phone, email, password);
             Console.WriteLine("You have succesfully registered!!");
+            return true;
         }
 
 
-        public void PrintSearchProductByName()
+        public bool PrintSearchProductByName()
         {
             Console.WriteLine("Enter name: ");
             string search = Console.ReadLine();
             guestService.SearchProductByName(search);
+            return true;
         }
     }
 }

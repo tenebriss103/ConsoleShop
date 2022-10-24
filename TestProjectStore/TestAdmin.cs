@@ -1,4 +1,4 @@
-﻿
+﻿using ClassLibrary1.Models;
 using ClassLibrary1.Repositories;
 using ClassLibrary1.Services;
 using Moq;
@@ -6,7 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using ClassLibrary1.Models;
+
 
 namespace TestProject1
 {

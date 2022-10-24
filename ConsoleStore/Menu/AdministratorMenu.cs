@@ -31,7 +31,7 @@ namespace ClassLibrary1.Menu
             Console.WriteLine("9) Sign out of the account");
         }
 
-        public void PrintAddNewProduct()
+        public bool PrintAddNewProduct()
         {
             Console.Write("Enter name: ");
             string name = Console.ReadLine();
@@ -44,15 +44,17 @@ namespace ClassLibrary1.Menu
 
             administratorService.AddNewProduct(name, price, description, category);
             Console.WriteLine("Product added.");
+            return true;
         }
-        public void PrintCreatingNewOrder()
+        public bool PrintCreatingNewOrder()
         {
             Console.WriteLine("Enter productId:");
 
             int prodId = Convert.ToInt32(Console.ReadLine());
             administratorService.CreatingNewOrder(prodId);
+            return true;
         }
-            public void PrintChangeInformationProduct()
+            public bool PrintChangeInformationProduct()
         {
             Console.WriteLine("Enter productId:");
             int prodId = Convert.ToInt32(Console.ReadLine());
@@ -68,9 +70,10 @@ namespace ClassLibrary1.Menu
 
             administratorService.ChangeInformationProduct(prodId, name, price, description, category);
             Console.WriteLine("Change information successfully!");
+            return true;
         }
 
-        public void PrintChangingInformationUsers()
+        public bool PrintChangingInformationUsers()
         {
             Console.WriteLine("Enter userId:");
             int userId = Convert.ToInt32(Console.ReadLine());
@@ -85,15 +88,17 @@ namespace ClassLibrary1.Menu
 
             administratorService.ChangingInformationUsers(userId, name, surname, phone, email);
             Console.WriteLine("Change information successfully!");
+            return true;
 
         }
-        public void PrintSearchProductByName()
+        public bool PrintSearchProductByName()
         {
             Console.WriteLine("Enter name: ");
             string search = Console.ReadLine();
             administratorService.SearchProductByName(search);
+            return true;
         }
-        public void PrintChangeStatusOrder()
+        public bool PrintChangeStatusOrder()
         {
             Console.WriteLine("Enter orderId:");
             int orderId = Convert.ToInt32(Console.ReadLine());
@@ -130,6 +135,7 @@ namespace ClassLibrary1.Menu
             }
             administratorService.ChangeStatusOrder(orderId, status);
             Console.WriteLine("Change status successfully!");
+            return true;
         }
         
     }

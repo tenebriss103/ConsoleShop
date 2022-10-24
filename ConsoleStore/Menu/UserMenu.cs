@@ -26,14 +26,15 @@ namespace ClassLibrary1.Menu
             Console.WriteLine("8) Sign out of the account");
         }
         
-        public void PrintSettingStatusOrder()
+        public bool PrintSettingStatusOrder()
         {
             Console.WriteLine("Enter ID of order you received::");
             int orderId = Convert.ToInt32(Console.ReadLine());
             userService.SettingStatusOrder(orderId);
             Console.WriteLine($"Status 'Received' set to order with ID {orderId}");
+            return true;
         }
-        public void PrintChangingPersonalInformation()
+        public bool PrintChangingPersonalInformation()
         {
             Console.WriteLine("Enter email:");
             string userEmail = Console.ReadLine();
@@ -45,28 +46,32 @@ namespace ClassLibrary1.Menu
             string phone = Console.ReadLine();            
             userService.ChangingPersonalInformation(userEmail, name, surname, phone);
             Console.WriteLine("Change information successfully!");
+            return true;
 
         }
-        public void PrintCreatingNewOrder()
+        public bool PrintCreatingNewOrder()
         {
             Console.WriteLine("Enter productId:");
 
             int prodId = Convert.ToInt32(Console.ReadLine());
             userService.CreatingNewOrder(prodId);
+            return true;
         }
-        public void PrintCancelOrder()
+        public bool PrintCancelOrder()
         {            
             Console.WriteLine("Enter ID of order you canceled::");
             int orderId = Convert.ToInt32(Console.ReadLine());
             userService.CancelOrder(orderId);
             Console.WriteLine("Canceled");
+            return true;
 
         }
-            public void PrintSearchProductByName()
+            public bool PrintSearchProductByName()
         {
             Console.WriteLine("Enter name: ");
             string search = Console.ReadLine();
             userService.SearchProductByName(search);
+            return true;
         }
 
     }

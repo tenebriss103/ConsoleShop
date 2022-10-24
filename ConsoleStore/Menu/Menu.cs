@@ -16,6 +16,7 @@ namespace ClassLibrary1.Menu
         private readonly AdministratorMenu administratorMenu;
         private readonly GuestMenu guestMenu;
         private readonly UserMenu userMenu;
+        
 
         public Menu()
         {
@@ -25,134 +26,113 @@ namespace ClassLibrary1.Menu
             administratorMenu = new AdministratorMenu(repository);
             guestMenu = new GuestMenu(repository);
             userMenu = new UserMenu(repository);
+           
         }       
 
         private void ChooseOptionsAdmin()
         {
             Console.WriteLine("Choose options please ");
             int command = Convert.ToInt32(Console.ReadLine());
-            switch (command)
-            {
-                case 1:
-                    administratorService.GetProducts();
-                    administratorMenu.PrintOptionsAdmin();
-                    ChooseOptionsAdmin();
-                    break;
-                case 2:
-                    administratorMenu.PrintSearchProductByName();
-                    administratorMenu.PrintOptionsAdmin();
-                    ChooseOptionsAdmin();
-                    break;
-                case 3:
-                    administratorMenu.PrintCreatingNewOrder();
-                    administratorMenu.PrintOptionsAdmin();
-                    ChooseOptionsAdmin();
-                    break;
-                case 4:
-                    administratorService.ViewingInformationUsers();
-                    administratorMenu.PrintOptionsAdmin();
-                    ChooseOptionsAdmin();
-                    break;
-                case 5:
-                    administratorMenu.PrintChangingInformationUsers();
-                    administratorMenu.PrintOptionsAdmin();
-                    ChooseOptionsAdmin();
-                    break;
-                case 6:
-                    administratorMenu.PrintAddNewProduct();
-                    administratorMenu.PrintOptionsAdmin();
-                    ChooseOptionsAdmin();
-                    break;
-                case 7:
-                    administratorMenu.PrintChangeInformationProduct();
-                    administratorMenu.PrintOptionsAdmin();
-                    ChooseOptionsAdmin();
-                    break;
-                case 8:
-                    administratorMenu.PrintChangeStatusOrder();
-                    administratorMenu.PrintOptionsAdmin();
-                    ChooseOptionsAdmin();
-                    break;
-                case 9:
-                    administratorService.SignOut();
-                    Console.Clear();
-                    guestMenu.PrintOptionsGuest();
-                    ChooseOptionsGuest();
-                    break;
-                
-            }
-            
+            DictionaryAdministrator(command);        
+
         }
         private void ChooseOptionsUser()
         {
             Console.WriteLine("Choose options please ");
             int command = Convert.ToInt32(Console.ReadLine());
-            switch (command)
-            {
-                case 1:
-                    userService.GetProducts();
-                    userMenu.PrintOptionsUser();
-                    ChooseOptionsUser();
-                    break;
-                case 2:
-                    userMenu.PrintSearchProductByName();
-                    userMenu.PrintOptionsUser();
-                    ChooseOptionsUser();
-                    break;
-                case 3:
-                    userMenu.PrintCreatingNewOrder();
-                    userMenu.PrintOptionsUser();
-                    ChooseOptionsUser();
-                    break;
-                case 4:
-                    userMenu.PrintCancelOrder();
-                    userMenu.PrintOptionsUser();
-                    ChooseOptionsUser();
-                    break;
-                case 5:
-                    userService.SeeOrderHistory();
-                    userMenu.PrintOptionsUser();
-                    ChooseOptionsUser();
-                    break;
-                case 6:
-                    userMenu.PrintSettingStatusOrder();
-                    userMenu.PrintOptionsUser();
-                    ChooseOptionsUser();
-                    break;
-                case 7:
-                    userMenu.PrintChangingPersonalInformation();
-                    userMenu.PrintOptionsUser();
-                    ChooseOptionsUser();
-                    break;
-                case 8:
-                    userService.SignOut();
-                    Console.Clear();
-                    guestMenu.PrintOptionsGuest();
-                    ChooseOptionsGuest();
-                    break;
-               
-            }
+            DictionaryUser(command);
+            
         }
         private void ChooseOptionsGuest()
         {
             Console.WriteLine("Choose options please ");
             int command = Convert.ToInt32(Console.ReadLine());
-            switch (command)
-            {
-                
-                case 1:
-                    guestMenu.PrintSearchProductByName();
-                    break;
-                case 2:
-                    guestMenu.PrintAccountRegistration();
-                    break;
-                case 3:
-                    LoginAccount();
-                    break;
+            DictionaryGuest(command);
+           
+        }
 
+        public void DictionaryGuest(int command)
+        {
+            var dico = new Dictionary<int, Delegate>();
+            dico[1] = new Func<bool>(guestMenu.PrintSearchProductByName);
+            dico[2] = new Func<bool>(guestMenu.PrintAccountRegistration);
+            dico[3] = new Func<bool>(LoginAccount);
+
+            foreach (int item in dico.Keys)
+            {
+                if (item == command)
+                {
+                    dico[item].DynamicInvoke();
+                    ChooseOptionsGuest();
+                }               
             }
         }
-        public void LoginAccount()
+        public void DictionaryUser(int command)
+        {
+            var dico = new Dictionary<int, Delegate>();
+            dico[1] = new Func<bool>(userService.GetProducts);
+            dico[2] = new Func<bool>(userMenu.PrintSearchProductByName);
+            dico[3] = new Func<bool>(userMenu.PrintCreatingNewOrder);
+            dico[4] = new Func<bool>(userMenu.PrintCancelOrder);
+            dico[5] = new Func<bool>(userService.SeeOrderHistory);
+            dico[6] = new Func<bool>(userMenu.PrintSettingStatusOrder);
+            dico[7] = new Func<bool>(userMenu.PrintChangingPersonalInformation);
+            dico[8] = new Func<bool>(userService.SignOut);
+            
+            foreach (int item in dico.Keys)
+            {
+                if (item == command)
+                {
+
+                    dico[item].DynamicInvoke();                    
+                    if (command == 8)
+                    {
+                        guestMenu.PrintOptionsGuest();
+                        ChooseOptionsGuest();
+                    }
+                    else
+                    {
+                        userMenu.PrintOptionsUser();
+                        ChooseOptionsUser();
+                    }
+                }
+            }
+
+        }
+        public void DictionaryAdministrator(int command)
+        {
+            var dico = new Dictionary<int, Delegate>();
+            dico[1] = new Func<bool>(administratorService.GetProducts);
+            dico[2] = new Func< bool>(administratorMenu.PrintSearchProductByName);
+            dico[3] = new Func<bool>(administratorMenu.PrintCreatingNewOrder);
+            dico[4] = new Func<bool>(administratorService.ViewingInformationUsers);
+            dico[5] = new Func<bool>(administratorMenu.PrintChangingInformationUsers);
+            dico[6] = new Func<bool>(administratorMenu.PrintAddNewProduct);
+            dico[7] = new Func< bool>(administratorMenu.PrintChangeInformationProduct);
+            dico[8] = new Func<bool>(administratorMenu.PrintChangeStatusOrder);
+            dico[9] = new Func<bool>(administratorService.SignOut);
+            foreach (int item in dico.Keys)
+            {
+                if (item == command)
+                {
+                    
+                    dico[item].DynamicInvoke();                    
+                    if (command == 9)
+                    {
+                        guestMenu.PrintOptionsGuest();
+                        ChooseOptionsGuest();
+                    }
+                    else
+                    {
+                        administratorMenu.PrintOptionsAdmin();
+                        ChooseOptionsAdmin();
+                    }
+                }
+            }
+
+        }
+
+        public bool LoginAccount()
         {
             Console.WriteLine("Enter Email: ");
             string email = Console.ReadLine();
@@ -178,6 +158,7 @@ namespace ClassLibrary1.Menu
 
                 }
             }
+            return true;
 
         }
 
@@ -185,7 +166,6 @@ namespace ClassLibrary1.Menu
         {
             guestMenu.PrintOptionsGuest();
             ChooseOptionsGuest();
-
 
         }
 

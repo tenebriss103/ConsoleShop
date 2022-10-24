@@ -69,8 +69,8 @@ namespace TestProject1
             data.Setup(p => p.Persons)
              .Returns(new List<Person>()
              {
-                    new Person(){  PersonId = 1, Name = "Ivan", Surname = "Sericov", Email = "ivan123@gmail.com", Phone = "380965412236", Password = "hbghjkl33" },
-                    });
+                    new Person(){  PersonId = 1, Name = "Ivan", Surname = "Sericov", Email = "ivan123@gmail.com", Phone = "380965412236", Password = "hbghjkl33", Online = true },
+                    }) ;
             services.ChangingPersonalInformation("ivan123@gmail.com","Ivanna", "Sericova", "380661112585");
             Assert.IsTrue(true);
 
